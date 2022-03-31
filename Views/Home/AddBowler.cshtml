@@ -1,0 +1,77 @@
+﻿@{
+    @model Bowler;
+
+    // Get a little fancy with the tab title
+    if (Model == null)
+    {
+        ViewBag.Title = "Registration";
+    }
+    else
+    {
+        ViewBag.Title = $"Edit {Model.BowlerFirstName} {Model.BowlerLastName}";
+    }
+
+}
+@*Toggle the title based on if this is add or edit (which is determined by the model)*@
+@if (Model == null) { <h1> Register a New Bowler! </h1> }
+else { <h1> Edit Details for @Model.BowlerFirstName @Model.BowlerMiddleInit @Model.BowlerLastName</h1>}
+<div class="my-4 py-4">
+    <form method="post">
+        @* This Hidden input is needed to pass along the Bowler ID when editing a Bowler. *@
+        @if (Model != null)
+        {
+            <input type="hidden" asp-for="BowlerID" value="@Model.BowlerID" />
+        }
+        <div class="form-group">
+            <label asp-for="BowlerFirstName">First Name</label>
+            <input class="form-control" asp-for="BowlerFirstName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerMiddleInit">Middle Initial</label>
+            <input class="form-control" asp-for="BowlerMiddleInit" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerLastName">Last Name</label>
+            <input class="form-control" asp-for="BowlerLastName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="TeamID">Team</label>
+            <select class="form-control" asp-for="TeamID">
+                <option selected="selected" value="">Please select</option>
+                @foreach (Team team in ViewBag.Teams)
+                {
+                    <option value="@team.TeamID">@team.TeamName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerAddress">Street Address</label>
+            <input class="form-control" asp-for="BowlerAddress" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerCity">City</label>
+            <input class="form-control" asp-for="BowlerCity" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerState">State</label>
+            @*Todo: update to use a dropdown*@
+            @* <select class="form-control" asp-for="BowlerState" asp-items="@Html.GetEnumSelectList<State>()">
+                <option selected="selected" value="">Please select</option>
+            </select> *@
+
+            <label asp-for="BowlerState">State</label>
+            <input class="form-control" asp-for="BowlerState" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerZip">Zip Code</label>
+            <input class="form-control" asp-for="BowlerZip" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerPhoneNumber">Phone Number</label>
+            <input class="form-control" asp-for="BowlerPhoneNumber" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div asp-validation-summary="All"></div>
+</div>

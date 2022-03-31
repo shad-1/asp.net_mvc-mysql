@@ -9,12 +9,12 @@
     @* Filter Builder *@
     <div class="col-3 sticky-top h-vh">
         <div class="d-flex flex-column h-100 justify-content-between">
-            @* Create space between the pagination and categories*@
+            @* Create space between for the categories*@
             <div>
                 <h4 class="mt-4 mb-2">Categories</h4>
                 @foreach (var team in Model.Teams)
                 {
-                    <div>
+                    <div> @*Conditional styling for actively filtering team*@
                         <a class="filter-item @(team.TeamID ==  ViewBag.SelectedTeam.TeamID ? "active" : "")" asp-controller="Home" asp-action="Index" asp-route-team="@team.TeamID">@team.TeamName</a>
                     </div>
                 }

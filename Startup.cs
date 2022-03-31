@@ -47,6 +47,7 @@ namespace bowlers
 
             app.UseEndpoints(endpoints =>
             {
+                // Custom endpoint for filtering the view down to a specific team.
                 endpoints.MapControllerRoute(
                    name: "filtered",
                    pattern: "Team/{team}",

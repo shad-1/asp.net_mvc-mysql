@@ -9,12 +9,6 @@ namespace bowlers.Models
 		{
 		}
 
-        public Team(int teamID, string teamName)
-        {
-            TeamID = teamID;
-            TeamName = teamName;
-        }
-
         [Key]
 		[Required]
 		public int TeamID { get; set; }
