@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.SelectedTeam.TeamName</h1>
+</div>
+<div class="row">
+    @* Filter Builder *@
+    <div class="col-3 sticky-top h-vh">
+        <div class="d-flex flex-column h-100 justify-content-between">
+            @* Create space between the pagination and categories*@
+            <div>
+                <h4 class="mt-4 mb-2">Categories</h4>
+                @foreach (var team in Model.Teams)
+                {
+                    <div>
+                        <a class="filter-item @(team.TeamID ==  ViewBag.SelectedTeam.TeamID ? "active" : "")" asp-controller="Home" asp-action="Index" asp-route-team="@team.TeamID">@team.TeamName</a>
+                    </div>
+                }
+                <div class="">
+                    <a class="my-4" asp-controller="Home" asp-action="Index" asp-route-team="0">Reset</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @* Bowler Info Cards *@
+    <div class="col-9">
+        @foreach (var bowler in Model.Bowlers)
+        {
+            <partial name="BowlerSummary" model="bowler" />
+        }
+        @if (Model.Bowlers.Count == 0)
+            {
+                <div class="my-4"><h4>No Bowlers on @ViewBag.SelectedTeam.TeamName this season</h4></div>
+            }
+    </div>
+</div>
+

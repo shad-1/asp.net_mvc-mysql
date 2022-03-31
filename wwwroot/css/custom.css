@@ -1,0 +1,14 @@
+﻿.h-vh {
+    height: calc(100vh - 67px - 57px - 60px); /*viewport - header - navbar - footer. Hacky, yes. But I don't want to rework all the asp.net default styling. */
+}
+
+.filter-item {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--dark);
+}
+
+    .filter-item:hover, .filter-item.active {
+        text-decoration: none;
+        color: var(--cyan);
+    }
